@@ -24,8 +24,6 @@ public class DefaulProductService implements ProductService {
         this.categoryRepository = categoryRepository;
     }
 
-
-
     @Override
     public ProductResponse create(ProductRequest request) {
         //kiem tra xem id có ton tai truoc khi them khong
@@ -69,14 +67,7 @@ public class DefaulProductService implements ProductService {
     @Override
     public ProductResponse findById(Long id) {
         Product product = repository.findById(id).orElseThrow(() -> new ResourceNotFound("Product with id " + id + " not found"));
-
-        ProductResponse productResponse = new ProductResponse();
-        productResponse.setId(product.getId());
-        productResponse.setName(product.getName());
-        productResponse.setDes(product.getDes());
-        productResponse.setQuantity(product.getQuantity());
-        productResponse.setPrice(product.getPrice());
-        return productResponse;
+        return toResponse(product);
     }
 
     @Override

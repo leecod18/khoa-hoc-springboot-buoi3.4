@@ -21,12 +21,12 @@ public class DefaulCategoryService implements CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final ProductService productService;
-    private final ResourceUrlProvider mvcResourceUrlProvider;
 
-    public DefaulCategoryService(CategoryRepository categoryRepository, ProductService productService, ResourceUrlProvider mvcResourceUrlProvider) {
+
+    public DefaulCategoryService(CategoryRepository categoryRepository, ProductService productService) {
      this.categoryRepository = categoryRepository;
         this.productService = productService;
-        this.mvcResourceUrlProvider = mvcResourceUrlProvider;
+
     }
 
     @Override
@@ -86,7 +86,7 @@ public class DefaulCategoryService implements CategoryService {
     @Override
     public void deleteCategoryById(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id+"Id not found"));
-        categoryRepository.deleteById(category.getId());
+        categoryRepository.delete(category);
     }
 
     @Override
