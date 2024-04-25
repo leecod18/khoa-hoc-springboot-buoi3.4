@@ -3,6 +3,7 @@ package com.example.demo.web.rest;
 import com.example.demo.dto.request.ProductRequest;
 import com.example.demo.dto.response.ProductResponse;
 import com.example.demo.service.ProductService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class ProductResoure {
         this.service = service;
     }
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ProductResponse create(@RequestBody ProductRequest request) {
         return service.create(request);
     }
